@@ -22,7 +22,8 @@ class AdministratorsController < ApplicationController
     def update
         @administrator	=	Administrator.find(params[:id])				
         if	@administrator.update(params.require(:administrator).permit(:title,:author,:isbn,:copies))						
-            redirect_to @administrator				
+            # redirect_to 'administrators/searchPage'
+            redirect_to '/administrators/searchPage'				
         else					
             render	'edit'				
         end
@@ -62,7 +63,7 @@ class AdministratorsController < ApplicationController
             # render search_path, danger:"This book can not be checkout!"
         else
             administrator.update_attribute(:copies, administrator.copies-1)
-            redirect_to "http://localhost:3000/administrators/searchPage"
+            redirect_to '/administrators/searchPage'
         end
     end
 end

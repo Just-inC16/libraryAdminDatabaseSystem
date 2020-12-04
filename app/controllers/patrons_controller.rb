@@ -1,8 +1,13 @@
 class PatronsController < ApplicationController
     def create
         @administrator	=	Administrator.find(params[:administrator_id])
-        @patron	=	@administrator.patrons.create(params.require(:patron).permit(:name,	:review))
-        redirect_to administrator_path(@administrator)
+        @patron	=	@administrator.patrons.new(params.require(:patron).permit(:name,	:review))
+        if	@patron.save 
+            redirect_to administrator_path(@administrator)
+        else
+            render	'new'
+        end
+        
     end
     def destroy
         @administrator	=	Administrator.find(params[:administrator_id])
@@ -38,6 +43,7 @@ class PatronsController < ApplicationController
     end
     def new
         @administrator=Administrator.find(params[:administrator_id])
+        @patron	=@administrator.patrons.new
     end
    
 end

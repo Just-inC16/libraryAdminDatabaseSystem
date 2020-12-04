@@ -1,14 +1,14 @@
 
 <h2>Add	Review:</h2>
 <%=	form_with(model:	 [	@administrator,	@administrator.patrons.build ],	local:	true)	do	|form|	%>
-    <%	if @administrator.errors.any?	%>
+    <%	if @patron.errors.any?	%>
     <div	id="error_explanation">
     <h2>
         error/s	prohibited
         this administrator from being saved:
     </h2>
     <ul>
-    <%	@administrator.errors.full_messages.each do	|msg|	%>
+    <% @patron.errors.full_messages.each do	|msg|	%>
     <li><%=	msg %></li>
     <%	end	%>
     <%	end	%>
