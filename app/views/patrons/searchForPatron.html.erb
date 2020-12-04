@@ -1,0 +1,23 @@
+<h1> Search Results </h1>
+
+<table>
+<tr>
+<th>Title</th>
+<th>Author</th>
+<th>ISBN</th>
+<th>Copies</th>
+<th>Link</th>
+<th></th>
+</tr>
+<%	@administrators.each do	|administrator|	%>
+<tr>
+<td><%=	administrator.title %></td>
+<td><%=	administrator.author %></td>
+<td><%=	administrator.isbn %></td>
+<td><%=	administrator.copies %></td>
+<td><%=	link_to 'Add Review',	new_administrator_patron_path(administrator)%></td>
+<td><%=	link_to 'View Reviews', administrator_path(administrator)%></td>
+</tr>
+<%	end	%>
+</table>
+<%=link_to 'Back',	administrator_patrons_path(1)%>

@@ -1,0 +1,30 @@
+<h1> Search Results </h1>
+
+<table>
+<tr>
+<th>Title</th>
+<th>Author</th>
+<th>ISBN</th>
+<th>Copies</th>
+<th>Link</th>
+<th></th>
+</tr>
+<%	@administrators.each do	|administrator|	%>
+<tr>
+<td><%=	administrator.title %></td>
+<td><%=	administrator.author %></td>
+<td><%=	administrator.isbn %></td>
+<td><%=	administrator.copies %></td>
+<td><%=	link_to 'Edit',	
+edit_administrator_path(administrator)	%></td>
+<td><%=	link_to 'Destroy',administrator_path(administrator),
+    method: :delete,
+    data:{confirm:'Are you sure?'}%></td>
+<% if (administrator.copies>0) %>
+    <td><%=	link_to_if(administrator.copies>0, 'Checkout',	{:controller => "administrators", :action => "checkoutBook", :admin=> administrator.id})%></td>
+<% end %>
+
+</tr>
+<%	end	%>
+</table>
+<%=link_to 'Back',	:controller => "administrators", :action => "searchPage"%>

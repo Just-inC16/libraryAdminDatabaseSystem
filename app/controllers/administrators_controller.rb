@@ -32,4 +32,37 @@ class AdministratorsController < ApplicationController
         @administrator.destroy
         redirect_to administrators_path
     end
+    def search
+        #Check title 
+        if (params[:title].present?)
+            titleCase=params[:title]
+        else    
+            titleCase="%" +params[:title] +"%"    
+        end
+         #Check author 
+         if (params[:author].present?)
+            authorCase=params[:author]
+        else    
+            authorCase="%" +params[:author] +"%"    
+        end
+         #Check isbn 
+         if (params[:isbn].present?)
+            isbnCase=params[:isbn]
+        else    
+            isbnCase="%" +params[:isbn] +"%"    
+        end
+        @administrators = Administrator.where("title LIKE ? AND author LIKE ? AND isbn LIKE ?",titleCase, authorCase, isbnCase)
+    end
+    def searchPage
+        @administrators=Administrator.all
+    end
+    def checkoutBook
+        administrator = Administrator.find(params[:admin])
+        if (administrator.copies==0)
+            # render search_path, danger:"This book can not be checkout!"
+        else
+            administrator.update_attribute(:copies, administrator.copies-1)
+            redirect_to "http://localhost:3000/administrators/searchPage"
+        end
+    end
 end

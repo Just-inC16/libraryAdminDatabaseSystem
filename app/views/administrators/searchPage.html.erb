@@ -1,0 +1,25 @@
+<h1>Search for book</h1>
+<form action="/search">
+    <input type ="test" name="title" placeholder="Title" >
+    <input type ="test" name="author" placeholder="Author" >
+    <input type ="test" name="isbn" placeholder="ISBN" >
+    <button type="submit"> Search </button>
+</form> 
+<h1>All Books</h1>
+<table>
+<tr>
+<th>Title</th>
+<th>Author</th>
+<th>ISBN</th>
+<th>Copies</th>
+</tr>
+<%	@administrators.each do	|administrator|	%>
+<tr>
+<td><%=	administrator.title %></td>
+<td><%=	administrator.author %></td>
+<td><%=	administrator.isbn %></td>
+<td><%=	administrator.copies %></td>
+</tr>
+<%	end	%>
+</table>
+<%=link_to 'Back',	administrators_path %>
