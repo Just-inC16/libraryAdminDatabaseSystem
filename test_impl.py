@@ -4,7 +4,7 @@ import impl
 
 class TestImpl(unittest.TestCase):
     def setUp(self):
-        self.implInstance=impl.PhysicalInfo("06-09-2000","Boxter", "F", 65, "97")
+        self.implInstance=impl.PhysicalInfo(1,2,3,4,5)
     def tearDown(self):
         self.implInstance=None
     #Check that the type matches
