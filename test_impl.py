@@ -1,10 +1,9 @@
 import unittest
-import re
 import impl
 
 class TestImpl(unittest.TestCase):
     def setUp(self):
-        self.implInstance=impl.PhysicalInfo(1,2,3,4,5)
+        self.implInstance=impl.PhysicalInfo()
     def tearDown(self):
         self.implInstance=None
     #Check that the type matches
@@ -58,20 +57,30 @@ class TestImpl(unittest.TestCase):
         self.assertEqual(self.implInstance.set_gender("F"), None )
     def test_date(self):
         self.assertRaises(ValueError,self.implInstance.set_date,"" )
-        self.assertRaises(ValueError,self.implInstance.set_date,"0123456" )
-        self.assertRaises(ValueError,self.implInstance.set_date,"msfsf" )
-        self.assertRaises(ValueError,self.implInstance.set_date,"03-04999?9" )
         self.assertRaises(ValueError,self.implInstance.set_date,"A" )
-        self.assertRaises(ValueError,self.implInstance.set_date,"0A-1B-2003")
         self.assertRaises(ValueError,self.implInstance.set_date, "None" )
-        self.assertRaises(ValueError,self.implInstance.set_date,"03-04 9999" )
-        self.assertRaises(ValueError,self.implInstance.set_date,"03-0-49999" )
-        self.assertRaises(ValueError,self.implInstance.set_date,"3-0-499999" )
         self.assertRaises(ValueError,self.implInstance.set_date,"---------" )
+        self.assertRaises(ValueError,self.implInstance.set_date,"msfsf" )
+        self.assertRaises(ValueError,self.implInstance.set_date,"0123456" )
+
+        self.assertRaises(ValueError,self.implInstance.set_date,"03-04999?9" )
+        self.assertRaises(ValueError,self.implInstance.set_date,"0A-1B-2003")
+        self.assertRaises(ValueError,self.implInstance.set_date,"03-04?2010" )
+        self.assertRaises(ValueError,self.implInstance.set_date,"03-04 2010" )
         self.assertRaises(ValueError,self.implInstance.set_date,"03-0499999" )
-        self.assertRaises(ValueError,self.implInstance.set_date,"0" )
-        self.assertEqual(self.implInstance.set_date("06-09-2004"), None )
-        self.assertEqual(self.implInstance.set_date("10-12-2010"), None )
+        self.assertRaises(ValueError,self.implInstance.set_date,"32-11-2010" )
+        self.assertRaises(ValueError,self.implInstance.set_date,"11-32-2010" )
+        self.assertRaises(ValueError,self.implInstance.set_date,"13-49-9999" )
+        self.assertRaises(ValueError,self.implInstance.set_date,"31-25-2012" )
+        self.assertRaises(ValueError,self.implInstance.set_date,"-1-4-2010" )
+
+        self.assertEqual(self.implInstance.set_date("1-4-2010"), None )
+        self.assertEqual(self.implInstance.set_date("11-31-2004"), None )
+        self.assertEqual(self.implInstance.set_date("10-31-2020"), None )
+        self.assertEqual(self.implInstance.set_date("31-10-2010"), None )
+        self.assertEqual(self.implInstance.set_date("1-1-2000"), None )
+        self.assertEqual(self.implInstance.set_date("01-01-2000"), None )
+        self.assertEqual(self.implInstance.set_date("001-001-02020" ), None )
 
     def test_height(self):
         self.assertRaises(ValueError,self.implInstance.set_height,0 )
