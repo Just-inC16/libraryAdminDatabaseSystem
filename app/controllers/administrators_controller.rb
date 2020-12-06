@@ -8,7 +8,7 @@ class AdministratorsController < ApplicationController
     def create 
         @administrator=Administrator.new(params.require(:administrator).permit(:title,:author,:isbn,:copies))
         if	@administrator.save 
-            redirect_to @administrator
+            redirect_to '/administrators/searchPage'	
         else
             render	'new'
         end
@@ -22,7 +22,6 @@ class AdministratorsController < ApplicationController
     def update
         @administrator	=	Administrator.find(params[:id])				
         if	@administrator.update(params.require(:administrator).permit(:title,:author,:isbn,:copies))						
-            # redirect_to 'administrators/searchPage'
             redirect_to '/administrators/searchPage'				
         else					
             render	'edit'				

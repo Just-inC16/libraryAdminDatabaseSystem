@@ -5,8 +5,7 @@
 <th>Title</th>
 <th>Author</th>
 <th>ISBN</th>
-<th>Copies</th>
-<th>Link</th>
+<th>Links</th>
 <th></th>
 </tr>
 <%	@administrators.each do	|administrator|	%>
@@ -14,7 +13,6 @@
 <td><%=	administrator.title %></td>
 <td><%=	administrator.author %></td>
 <td><%=	administrator.isbn %></td>
-<td><%=	administrator.copies %></td>
 <td><%=	link_to 'Add Review',	new_administrator_patron_path(administrator)%></td>
 <td><%=	link_to 'View Reviews', administrator_path(administrator)%></td>
 </tr>

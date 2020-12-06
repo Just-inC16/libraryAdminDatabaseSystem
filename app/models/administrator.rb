@@ -7,7 +7,7 @@ class Administrator < ApplicationRecord
         end
     end
     validate :nonEmpty
-    validates_length_of :isbn, is: 10, numericality: { only_integer: true }, message: " is not a 10-digit number" 
+    validates :isbn, format: { with: /\A\d{10}\z/, message: " is not a 10-digit number"  } 
     validates :isbn,
         :uniqueness=>{:message=> " is not unique" }
     validates :copies, 

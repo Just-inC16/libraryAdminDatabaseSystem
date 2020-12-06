@@ -10,10 +10,7 @@
 <strong>ISBN:</strong>
 <%=	@administrator.isbn %>
 </p>
-<p>
-<strong>Copies:</strong>
-<%=	@administrator.copies %>
-</p>
+
 <% if (@administrator.patrons.length!=0) %>
     <h1> View Reviews </h1>
     <%	@administrator.patrons.each do	|patron|	%>
@@ -25,9 +22,7 @@
         <strong>Review:</strong>
         <%=	patron.review %>
         </p>
-        <%=	link_to 'Destroy Review',	 [patron.administrator,	patron],
-        method:	:delete,
-        data:	{	confirm:	'Are	you	 sure?'	}	%>
+        <br>
     <%	end	%>
 <% end %> 
 </br>
