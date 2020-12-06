@@ -30,7 +30,7 @@ class PhysicalInfo:
         day=( len(str(int(temp[0])))==0 or len(str(int(temp[0])))>2)
         month=( len(str(int(temp[1])))==0 or len(str(int(temp[1])))>2)
         # Check valid year,day, month
-        if ( len(str(int(temp[2])))!=4 and  day and month):
+        if ( len(str(int(temp[2])))!=4 or day or month):
             raise ValueError("Year, month, and day must be valid") 
         # Check valid months 
         if ( int(temp[0])>=1 and int(temp[0])<=31 and int(temp[1])>=1 and int(temp[1])<=12 ):

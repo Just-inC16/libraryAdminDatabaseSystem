@@ -70,9 +70,9 @@ class TestImpl(unittest.TestCase):
         self.assertRaises(ValueError,self.implInstance.set_date,"03-0499999" )
         self.assertRaises(ValueError,self.implInstance.set_date,"32-11-2010" )
         self.assertRaises(ValueError,self.implInstance.set_date,"11-32-2010" )
-        self.assertRaises(ValueError,self.implInstance.set_date,"13-49-9999" )
+        self.assertRaises(ValueError,self.implInstance.set_date,"13-49-0109" )
         self.assertRaises(ValueError,self.implInstance.set_date,"31-25-2012" )
-        self.assertRaises(ValueError,self.implInstance.set_date,"-1-4-2010" )
+        self.assertRaises(ValueError,self.implInstance.set_date,"-1-4-0010" )
 
         self.assertEqual(self.implInstance.set_date("1-4-2010"), None )
         self.assertEqual(self.implInstance.set_date("11-31-2004"), None )
@@ -80,7 +80,7 @@ class TestImpl(unittest.TestCase):
         self.assertEqual(self.implInstance.set_date("31-10-2010"), None )
         self.assertEqual(self.implInstance.set_date("1-1-2000"), None )
         self.assertEqual(self.implInstance.set_date("01-01-2000"), None )
-        self.assertEqual(self.implInstance.set_date("001-001-02020" ), None )
+        self.assertEqual(self.implInstance.set_date("001-001-0002020" ), None )
 
     def test_height(self):
         self.assertRaises(ValueError,self.implInstance.set_height,0 )
@@ -108,15 +108,17 @@ class TestImpl(unittest.TestCase):
         self.assertEqual(self.implInstance.set_temperature(104.0), None )
         self.assertEqual(self.implInstance.set_temperature(97.3), None )
     def test_name(self):
-        self.assertRaises(ValueError,self.implInstance.set_name,0.0 )
-        self.assertRaises(ValueError,self.implInstance.set_name,-1.0 )
-        self.assertRaises(ValueError,self.implInstance.set_name,-100.0 )
-        self.assertRaises(ValueError,self.implInstance.set_name,150.0 )
-        self.assertRaises(ValueError,self.implInstance.set_name,5.0 )
-        self.assertRaises(ValueError,self.implInstance.set_name,104.01)
-        self.assertRaises(ValueError,self.implInstance.set_name,94.9999999)
+        self.assertRaises(ValueError,self.implInstance.set_name,"a-" )
+        self.assertRaises(ValueError,self.implInstance.set_name,"894916 -" )
+        self.assertRaises(ValueError,self.implInstance.set_name,"         " )
+        self.assertRaises(ValueError,self.implInstance.set_name,"- A B - ☺" )
+        self.assertRaises(ValueError,self.implInstance.set_name,"I♥U" )
+        self.assertRaises(ValueError,self.implInstance.set_name,"99" )
         self.assertEqual(self.implInstance.set_name("ab0987"), None )
         self.assertEqual(self.implInstance.set_name("ab-"), None )
         self.assertEqual(self.implInstance.set_name("ABC - 7 - ZYX"), None )
+        self.assertEqual(self.implInstance.set_name("                 ab"), None )
+        self.assertEqual(self.implInstance.set_name("          -       99a"), None )
+
 if __name__=='__main__':
     unittest.main()
