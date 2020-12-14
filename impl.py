@@ -15,7 +15,6 @@ class PhysicalInfo:
     #must be string
     # Date will be "MM-DD-YYYY" or "DD-MM-YYYY"
     def set_date(self, newDate):
-        print("Date", self.date)
         #Check string type
         if (not isinstance(newDate,str)):
             raise ValueError("Need to be str instance")
@@ -29,18 +28,19 @@ class PhysicalInfo:
             raise ValueError("Only numbers are allowed or Less than 10 characters") 
         day=( len(str(int(temp[0])))==0 or len(str(int(temp[0])))>2)
         month=( len(str(int(temp[1])))==0 or len(str(int(temp[1])))>2)
-        # Check valid year,day, month
+        # Check digit count year, day, month
         if ( len(str(int(temp[2])))!=4 or day or month):
-            raise ValueError("Year, month, and day must be valid") 
+            raise ValueError("Year, month, and day must be valid")
+        #Check valid range
+        if ( int(temp[2])<1900 or  int(temp[2])>2100):
+            raise ValueError("Invalid range for year") 
         # Check valid months 
         if ( int(temp[0])>=1 and int(temp[0])<=31 and int(temp[1])>=1 and int(temp[1])<=12 ):
              self.date=newDate
-             print("Date", self.date)
              return 
         # Check valid days
         if ( int(temp[1])>=1 and int(temp[1])<=31 and int(temp[0])>=1 and int(temp[0])<=12 ):
              self.date=newDate
-             print("Date", self.date)
              return 
         raise ValueError("Date: Invalid numbers for date for days, month, year.")
     #must be string
@@ -82,5 +82,3 @@ class PhysicalInfo:
             return
         else: 
             raise ValueError("Temperature: Must float instance and between 95.0 and 104.0")
-# x=PhysicalInfo("06-09-2000","Justin", "F", 65, "97")
-# x.set_date("001-001-02020")
