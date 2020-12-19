@@ -9,6 +9,14 @@
 <th></th>
 </tr>
 <%	@administrators.each do	|administrator|	%>
+    <%	if @administrator.errors.any?	%>
+    <div	id="error_explanation">
+        <h2>
+        error/s	prohibited
+        this administrator from checking out:
+        </h2>
+    </div>
+    <%	end	%>
 <tr>
 <td><%=	administrator.title %></td>
 <td><%=	administrator.author %></td>

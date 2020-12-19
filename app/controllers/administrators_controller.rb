@@ -60,6 +60,7 @@ class AdministratorsController < ApplicationController
         administrator = Administrator.find(params[:admin])
         if (administrator.copies==0)
             # render search_path, danger:"This book can not be checkout!"
+            render 'search'
         else
             administrator.update_attribute(:copies, administrator.copies-1)
             redirect_to '/administrators/searchPage'
